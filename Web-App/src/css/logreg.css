@@ -1,0 +1,68 @@
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0px;
+    display: inline-block;
+    border: 1px solid #CCCCCC;
+    box-sizing: border-box;
+    outline-color: #352123;
+}
+
+.header {
+    margin: 0;
+    border-top: 6px solid #352123;
+    border-bottom: 6px solid #352123;
+    box-shadow: none;
+    background: #C9BAB5;
+}
+.header span {
+    color: #352123;
+}
+
+.container {
+    position: relative;
+    background: whitesmoke;
+    margin: 40px;
+    padding: 30px;
+    color: #352123;
+}
+
+.container h2 {
+
+}
+
+a.nav-pages {
+    color: #352123;
+}
+
+a.nav-pages:hover {
+    background-color: #352123;
+    border: 1px solid whitesmoke;
+    box-shadow: 0px 1px 5px #352123;
+    color: #C9BAB5;
+}
+a.nav-pages:active {
+    color: whitesmoke;
+}
+
+button {
+    background-color: #49Ab49;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    outline-color: #352123;
+}
+.cancelbtn {
+    padding: 14px 20px;
+    background-color: #352123;
+}
+.cancelbtn, .signupbtn {
+    float: left;
+    width: 50%;
+}
+.signinbtn {
+    float: right;
+}
