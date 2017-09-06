@@ -1,0 +1,34 @@
+{
+  "intents": [
+    {
+      "intent": "QueryIntent",
+      "slots": [
+        {
+            "name":"task",
+            "type":"LIST_OF_TASKS"
+        }
+      ]
+    },
+    {
+      "intent": "ContinueIntent"
+    },
+    {
+      "intent": "JumpIntent",
+      "slots": [
+        {
+            "name":"number"
+            "type":"AMAZON.number"
+        }
+      ]
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+}
+  ]
+}
