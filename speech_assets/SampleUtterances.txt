@@ -1,5 +1,0 @@
-QueryIntent How do I {task}
-QueryIntent Tell me how to {task}
-
-ContinueIntent continue
-ContinueIntent next step
