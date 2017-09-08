@@ -63,6 +63,8 @@ def query(task):
     task = task.lower()
     task = task.replace('-', ' ')
     
+    print('task: {}'.format(task))
+    
     #find JSON in database and store in result. Store None if not found.
     statement = 'SELECT * FROM tasks where name="%s"'
 
