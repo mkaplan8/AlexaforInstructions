@@ -1,0 +1,11 @@
+.container {
+    position: relative;
+    background: whitesmoke;
+    margin: 40px;
+    padding: 30px;
+    color: #352123;
+}
+
+label {
+    color: black;
+}

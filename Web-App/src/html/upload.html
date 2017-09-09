@@ -8,6 +8,7 @@
     <meta name="description" content="Alexa For Instructions | Profile">
     <meta name="author" content="AlexaForInstructions">
 
+    <link rel="stylesheet" href="../css/upload.css">
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/styles-coffee.css">
 </head>
@@ -19,6 +20,21 @@
             <span>Alexa for Instructions</span>
             <span style="float:right;margin-right:10px;font-size:12pt;">Welcome Back, Pradeep</span><br>
             <span id="date-time" style="float:right;margin-right:10px;font-size:12pt;"></span>
+        </div>
+        <div class="container">
+            <form action="/action_page.php">
+                <div class="container stacked">
+                    <label for="fname">Task Title</label>
+                    <input type="text" id="tname" name="firstname" placeholder="type a title name...">
+                </div>
+
+                <div class="container">
+                    <label for="lname">Step 1</label>
+                    <input type="text" id="lname" name="lastname" placeholder="">
+                </div>
+
+                <input type="submit" value="Submit">
+            </form>
         </div>
     </div>
     <script>
