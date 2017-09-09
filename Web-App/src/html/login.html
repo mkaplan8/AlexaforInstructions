@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="wrapper">
+    <div class="wrapper" ng-app="app" ng-controller="ctrl">
         <div class="header">
             <br>
             <span>Alexa for Instructions</span>
@@ -35,7 +35,7 @@
                 <input type="password" placeholder="Enter Password" name="psw" required>
 
                 <div class="clearfix">
-                    <button type="submit" class="signinbtn">Sign In</button>
+                    <button type="submit" class="signinbtn" onclick="setTimeout(function() {location.href = 'profile.html'}, 1000)">Sign In</button>
                 </div>
             </form>
         </div>
