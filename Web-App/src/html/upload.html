@@ -18,25 +18,37 @@
         <div class="header">
             <br>
             <span>Alexa for Instructions</span>
+            <div id="nav-container">
+                <a class="nav-pages" href="../html/index.html">Home</a>
+            </div>
             <span style="float:right;margin-right:10px;font-size:12pt;">Welcome Back, Pradeep</span><br>
             <span id="date-time" style="float:right;margin-right:10px;font-size:12pt;"></span>
         </div>
         <div class="container">
-            <form action="/action_page.php">
-                <div class="container stacked">
-                    <label for="fname">Task Title</label>
-                    <input type="text" id="tname" name="firstname" placeholder="type a title name...">
-                </div>
+            <div class="stacked">
+                <label for="fname">Task Title</label>
+                <input type="text" id="tname" name="titlename" placeholder="Type a title name">
+            </div>
 
-                <div class="container">
-                    <label for="lname">Step 1</label>
-                    <input type="text" id="lname" name="lastname" placeholder="">
-                </div>
+            <div class="stacked">
+                <label for="step1">Step 1</label>
+                <input type="text" id="step1" name="step1">
+            </div>
 
-                <input type="submit" value="Submit">
-            </form>
+            <div class="stacked">
+                <label for="step2">Step 2</label>
+                <input type="text" id="step2" name="step2">
+            </div>
+
+            <div class="stacked">
+                <label for="step3">Step 3</label>
+                <input type="text" id="step3" name="step3">
+            </div>
         </div>
+        <button id="more-steps">New Step</button>
+        <button id="submit" onclick="setTimeout(function() {$('.container').html('Success!');}, 1000);">Submit</button>
     </div>
+    <script src="../js/jquery-3.2.1.min.js"></script>
     <script>
     function datetime() {
         var d = new Date(),
@@ -48,5 +60,11 @@
         document.getElementById("date-time").innerHTML = days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear()+', '+hours+':'+minutes+':'+d.getSeconds()+ampm;
     }
     setInterval(datetime,1);
+    var i = 4;
+    function newStep() {
+        $(".container").append('<div class="stacked"><label for="step'+i+'">Step '+i+' </label><input type="text" id="step'+i+'" name="step'+i+'"></div>');
+        i++;
+    }
+    $("#more-steps").on("click", newStep);
     </script>
 </body>
