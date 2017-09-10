@@ -34,3 +34,20 @@ a.nav-pages:active {
     padding: 30px;
     color: #352123;
 }
+.container h2 {
+    margin-bottom: 15px;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.stacked {
+    padding: 10px;
+}
+
+textarea {
+    width: 400px;
+}
+.step {
+    padding: 10px;
+    height: 40px;
+}
