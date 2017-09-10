@@ -120,7 +120,7 @@ a.nav-pages:active {
 
 div#dots-container {
     position: relative;
-    padding: 170px 0px;
+    padding: 170px 80px;
     background: white; /* For browsers that do not support gradients */
     background: -webkit-radial-gradient(white, whitesmoke, #A1887F); /* Safari 5.1 to 6.0 */
     background: -o-radial-gradient(white, whitesmoke, #A1887F); /* For Opera 11.6 to 12.0 */
