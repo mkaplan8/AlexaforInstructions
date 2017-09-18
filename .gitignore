@@ -1,0 +1,4 @@
+env/*
+ngrok
+example.json
+alexa_skill/db_helper.py
