@@ -16,7 +16,7 @@
       "intent": "JumpIntent",
       "slots": [
         {
-            "name":"number"
+            "name":"number",
             "type":"AMAZON.number"
         }
       ]
