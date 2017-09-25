@@ -15,14 +15,15 @@ j = json.loads(fn.read().replace('\n',''))
 fn.close()
 
 name = j['name']
-supplies = json.dumps(j['supplies'])
-steps = json.dumps(j['steps'])
+supplies = j['supplies']
+steps = j['steps']
 
 #print('name: {}'.format(name))
 #print('supplies: {}'.format(supplies))
 #print('steps: {}'.format(steps))
 
 #add shit to database
+
 
 conn = sqlite3.connect(database)
 cur = conn.cursor()

@@ -1,5 +1,4 @@
 import logging
-
 from random import randint
 from flask import Flask, render_template, g
 from flask_ask import Ask, statement, question, session
@@ -73,12 +72,10 @@ def query(task):
     try:
         result = cur.execute(statement % (task))
         result = result.fetchall()
-        print('result: {}'.format(result))
     except sqlite3.OperationalError:
         result = None
-    #print('result: {}'.format(result))
     if len(result) > 0:
-        populate_instructions(j['name'],j['supplies'],j['steps'])
+        populate_instructions(result[0][0], json.loads(result[0][1]), json.loads(result[0][2]))
         msg = 'I found the instructions. Say continue when ready.'
     else:
         msg = 'I could not find the instructions. Please try another query.'
