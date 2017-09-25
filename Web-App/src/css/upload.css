@@ -1,0 +1,53 @@
+.header {
+    margin-top: 6px;
+    box-shadow: none;
+    background: #C9BAB5;
+}
+.header span, .header p {
+    color: #352123;
+}
+a.nav-pages {
+    color: #352123;
+}
+a.nav-pages:hover {
+    background-color: #352123;
+    border: 1px solid whitesmoke;
+    box-shadow: 0px 1px 5px #352123;
+    color: #C9BAB5;
+}
+a.nav-pages:active {
+    color: whitesmoke;
+}
+#welcome-message {
+    margin-right: 10px;
+    float: right;
+}
+#welcome-message p {
+    font-size: 11pt;
+    line-height: 1.4;
+}
+
+.container {
+    position: relative;
+    background: whitesmoke;
+    margin: 40px;
+    padding: 30px;
+    color: #352123;
+}
+.container h2 {
+    margin-bottom: 15px;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.stacked {
+    padding: 10px;
+}
+
+textarea {
+    width: 400px;
+}
+.step {
+    padding: 10px;
+    height: 40px;
+}

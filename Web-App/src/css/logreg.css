@@ -9,9 +9,7 @@ input[type=text], input[type=password] {
 }
 
 .header {
-    margin: 0;
-    border-top: 6px solid #352123;
-    border-bottom: 6px solid #352123;
+    margin-top: 6px;
     box-shadow: none;
     background: #C9BAB5;
 }
@@ -28,7 +26,9 @@ input[type=text], input[type=password] {
 }
 
 .container h2 {
-
+    margin-bottom: 15px;
+    font-size: 16pt;
+    font-weight: bold;
 }
 
 a.nav-pages {
@@ -50,6 +50,7 @@ button {
     color: white;
     padding: 14px 20px;
     margin: 8px 0px;
+    margin-bottom: 0px;
     border: none;
     cursor: pointer;
     width: 100%;

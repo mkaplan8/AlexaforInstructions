@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>AlexaForInstructions</title>
+    <meta name="description" content="Alexa For Instructions | Profile">
+    <meta name="author" content="AlexaForInstructions">
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/upload.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <br>
+            <span>Alexa for Instructions</span>
+            <div id="nav-container">
+                <a class="nav-pages" href="../html/index.html">Home</a>
+            </div>
+            <div id="welcome-message">
+                <p>Welcome Back, Pradeep</p>
+                <p id="date-time"></p>
+            </div>
+        </div>
+        <div id="man-up" class="container">
+            <h2>Manual Upload</h2>
+            <div class="stacked">
+                <label for="fname">Task Title:</label>
+                <textarea id="tname" name="titlename" placeholder="Type a title name..."></textarea>
+            </div>
+
+            <div class="stacked">
+                <label for="fname">Materials:</label>
+                <textarea id="mats" name="materials" placeholder="List necessary materials by comma..."></textarea>
+            </div>
+
+            <div class="stacked">
+                <label for="step1">Step 1:</label>
+                <textarea class="step" id="step1" name="step1"></textarea>
+            </div>
+
+            <div class="stacked">
+                <label for="step2">Step 2:</label>
+                <textarea class="step" id="step2" name="step2"></textarea>
+            </div>
+
+            <div class="stacked">
+                <label for="step3">Step 3:</label>
+                <textarea class="step" id="step3" name="step3"></textarea>
+            </div>
+        </div>
+        <div class="container">
+            <button id="more-steps">New Step</button>
+            <button id="submit" onclick="setTimeout(function() {$('.container').html('Success!');}, 1000);">Submit</button>
+        </div>
+        <div class="separator">GT Junior Design, Group 7112: AlexaForInstructions</div>
+    </div>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/upload.js"></script>
+</body>

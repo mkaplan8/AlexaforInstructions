@@ -84,11 +84,11 @@ a.nav-pages:active {
     border-radius: 15px;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
-    box-shadow: 0px 0px 100px #C9BAB5;
+    box-shadow: 0px 0px 50px #C9BAB5;
     transition: all 1s ease;
 }
 .talk-bubble:hover {
-    box-shadow: 0px 0px 100px white;
+    box-shadow: 0px 0px 200px whitesmoke;
 }
 .talk-bubble.tail:before {
 	content: ' ';
@@ -99,9 +99,9 @@ a.nav-pages:active {
 	right: 18px;
 	bottom: -17px;
 	border: 8px solid;
-	border-color: #A1887F transparent transparent #A1887F;
+	border-color: #352123 transparent transparent #352123;
 }
-.talk-bubble.tail:after {
+/*.talk-bubble.tail:after {
 	content: ' ';
 	position: absolute;
 	width: 0;
@@ -111,7 +111,7 @@ a.nav-pages:active {
 	bottom: -12px;
 	border: 5px solid;
 	border-color: whitesmoke transparent transparent whitesmoke;
-}
+}*/
 .talk-text {
     margin: 0;
     padding: 0;
@@ -120,7 +120,7 @@ a.nav-pages:active {
 
 div#dots-container {
     position: relative;
-    padding: 170px 40px;
+    padding: 170px 80px;
     background: white; /* For browsers that do not support gradients */
     background: -webkit-radial-gradient(white, whitesmoke, #A1887F); /* Safari 5.1 to 6.0 */
     background: -o-radial-gradient(white, whitesmoke, #A1887F); /* For Opera 11.6 to 12.0 */
