@@ -1,0 +1,42 @@
+{% extends "base.html" -%}
+
+{% block head -%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/logreg.css') }}">
+{% endblock head -%}
+
+{% block content -%}
+<div class="wrapper" ng-app="app" ng-controller="ctrl">
+    <div class="header">
+        <br>
+        <span>Alexa for Instructions</span>
+        <div id="nav-container">
+            <a class="nav-pages" href="/">Home</a>
+            <a class="nav-pages" href="/register">Register</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <form id="login-form" action="" method="post" name="login">
+            <h2>Welcome Back&nbsp;&#9749;</h2>
+            <label><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email" required>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+
+            <div class="clearfix">
+                <button type="submit" class="signinbtn">Sign In</button>
+            </div>
+
+            {% if error %}
+            <p class="error"><strong>Error:</strong> {{ error }}</p>
+            {% endif %}
+        </form>
+    </div>
+    <div class="separator">GT Junior Design, Group 7112: AlexaForInstructions</div>
+</div>
+{% endblock content -%}
+
+{% block js -%}
+<script src="{{url_for('static', filename='js/login.js')}}"></script>
+{% endblock js -%}

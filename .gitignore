@@ -3,3 +3,7 @@ ngrok
 example.json
 alexa_skill/db_helper.py
 alexa_skill/alexa_dependencies/*
+web-app/__pycache__
+web-app/app/__pycache__
+web-app/app/flask
+web-app/app/pymysql
