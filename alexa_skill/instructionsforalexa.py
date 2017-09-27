@@ -5,46 +5,51 @@ from flask_ask import Ask, statement, question, session
 import json
 import sqlite3
 
+#initialize global variables
 DATABASE = 'tasks.db'
-
 instructions = []
 place, end = 0,0
 
-#Setup tasks database
+#flask and logging stuff
+app = Flask(__name__)
+ask = Ask(app, "/")
+logging.getLogger("flask_ask").setLevel(logging.DEBUG)
+
+#Setup connection to tasks database
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
         db = g._database = sqlite3.connect(DATABASE)
     return db
 
-#Open hard-coded example for demo purposes. This will replaced with query() later
-f = open('example.json')
-raw = f.read()
-global j
-j = json.loads(raw)
-
-#Fetch instruction set from database
-#def get_instructions(task):
-    #Query sqlite3 db
-
-app = Flask(__name__)
-ask = Ask(app, "/")
-logging.getLogger("flask_ask").setLevel(logging.DEBUG)
-
-#initialize global vars and greet user
 @ask.launch
 def welcome():
+    """
+    This is the launch intent. Called when a user asks alexa to (launch/start/open...etc) instructions
+    
+    returns: (question) Our welcome message with reprompt if needed.
+    """
     global place, end, instructions
     place, end = 0,0
-    instructions = []
+    instructions = [] #These first three lines may be redundant
     cur = get_db()
     welcome_msg = render_template('welcome')
     reprompt_msg = render_template('reprompt')
     return question(welcome_msg).reprompt(reprompt_msg)
     
-#task_name  parameter is the name of the task.
-#supp parameter is supplies array from the task JSON.
+
 def populate_instructions(task_name, supp, steps):
+    """
+    Helper function that fetches our task from DATABASE. Populates the global instructions variable.
+    
+    params
+        task_name: (str) the name of the task
+        supp: (list of dictionaries) This is a variable which represents all our supplies for our task. 
+        steps: (list of str) This parameter is a list of instructions for our task
+    
+    returns
+        None
+    """
     msg = 'Here\'s how to {}. You will need'.format(task_name)
     for s in supp:
         msg = msg + ' ' + s['amount'] + ' ' + s['name'] + ','
@@ -55,9 +60,18 @@ def populate_instructions(task_name, supp, steps):
     global end
     end = len(steps)
     
-#This method is used to query our task database
 @ask.intent('QueryIntent')
 def query(task):
+    """
+    This method is used to query our task database when a user asks for a task. Called on Alexa 'QueryIntent.'
+    
+    params
+        task: (str) This is the task you ask alexa about
+        
+    returns
+        msg: (question) This is the message alexa reads back to you.
+    
+    """
     #First, transform our argument
     task = task.lower()
     task = task.replace('-', ' ')
@@ -81,9 +95,15 @@ def query(task):
         msg = 'I could not find the instructions. Please try another query.'
     return question(msg)
 
-#The user will iterate through instructions once the global instructions variable is populated.
 @ask.intent('ContinueIntent')
 def continue_task():
+    """
+    The user will use this function to iterate through instructions once the global instructions variable is populated.
+    Called on Alexa 'ContinueIntent'
+    
+    returns
+        msg: (str) The next step in instructions
+    """
     global place
     if len(instructions) == 0:
         return question('There is no current task session. What would you like me to do?')
@@ -99,6 +119,13 @@ def continue_task():
     
 @ask.intent('PreviousIntent')
 def prev_step():
+    """
+    The user will use this function to iterate backwards through instructions once the global instructions variable is populated.
+    Called on Alexa 'PreviousIntent'
+    
+    returns
+        msg: (str) The previous step in instructions
+    """
     global place
     if len(instructions) == 0:
         return question('There is no current task session. What would you like me to do?')
@@ -108,6 +135,13 @@ def prev_step():
 
 @ask.intent('RepeatIntent')
 def repeat_step():
+    """
+    The user will use this function to repeat instructions once the global instructions variable is populated.
+    Called on Alexa 'RepeatIntent'
+    
+    returns
+    msg: (str) The current step in instructions
+    """
     if len(instructions) == 0:
         return question('There is no current task session. What would you like me to do?')
     else:
@@ -115,6 +149,13 @@ def repeat_step():
     
 @ask.intent('JumpIntent')
 def jump(number):
+    """
+    The user will use this function to jump to instructions once the global instructions variable is populated.
+    Called on Alexa 'JumpIntent'
+    
+    returns
+    msg: (str) The desired step in instructions
+    """
     if len(instructions) == 0:
         return question('There is no current task session. What would you like me to do?')
     else:
@@ -125,10 +166,22 @@ def jump(number):
     
 @ask.intent('AMAZON.StopIntent')
 def stop():
+    """
+    Stops the skill session. Called on Alexa 'StopIntent'
+    
+    returns
+        msg: (statement) Goodbye message
+    """
     return statement('goodbye.')
     
 @ask.session_ended
 def session_ended():
+    """
+    Defines HTTP response for session end.
+    
+    returns
+        "200 HTTP status code"
+    """
     return "{}", 200
 
 if __name__ == '__main__':
