@@ -40,11 +40,11 @@
             <div class="talk-text">
                 <img class="file" src="../images/file.png">
                 <span>Upload</span>
-                <img class="right-arrow" src="../images/play-button.png">
-                <img class="edit-file" src="../images/document.png">
+                <img class="right-arrow" src="{{ url_for('static',filename='images/play-button.png') }}">
+                <img class="edit-file" src="{{ url_for('static',filename='images/document.png') }}">
                 <span>Edit</span>
-                <img class="right-arrow" src="../images/play-button.png">
-                <img class="folder" src="../images/folder.png">
+                <img class="right-arrow" src="{{ url_for('static',filename='images/play-button.png') }}">
+                <img class="folder" src="{{ url_for('static',filename='images/folder.png') }}">
                 <span>Save</span>
             </div>
         </div>

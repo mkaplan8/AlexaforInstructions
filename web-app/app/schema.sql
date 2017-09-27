@@ -1,17 +1,9 @@
-CREATE TABLE IF NOT EXISTS users (
-    -- user_id     int(11) NOT NULL AUTO_INCREMENT,
-    -- username    varchar(255) NOT NULL,
-    email       varchar(255) NOT NULL,
-    password    varchar(255) NOT NULL,
-    -- logged_in   tinyint(1) NOT NULL,
-    -- first_name  varchar(255) NOT NULL,
-    -- last_name   varchar(255) NOT NULL,
-    -- alexa_id    varchar(255),
-    -- age         int(3) NOT NULL,
-    -- UNIQUE (username),
-    PRIMARY KEY (email),
-    -- PRIMARY KEY (user_id)
-)ENGINE=InnoDB;
+CREATE TABLE `alexaforinstructions`.`new_table` (
+  `email` VARCHAR(255) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`email`));
+
+INSERT INTO users VALUES ("admin@example.com", "admin")
 
 -- CREATE TABLE IF NOT EXISTS tasks (
 --     task_id     int(11) NOT NULL AUTO_INCREMENT,
