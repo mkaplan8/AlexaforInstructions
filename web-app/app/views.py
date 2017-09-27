@@ -19,7 +19,7 @@ def login():
         password = request.form["password"]
         result = model.check_user(email, password)
         if (result == None):
-            error='Invalid Credentials. Please try again.'
+            error = 'Invalid Credentials. Please try again.'
         else:
             success = True;
 
@@ -42,11 +42,14 @@ def register():
         confirm = request.form["confirm"]
 
         validEmail = validate_email(email)
+        existingEmail = model.user_exists(email)
         validPass, passError = model.validate_pass(password)
         if (not validEmail):
             error = "Please use a valid email address."
         elif (not validPass):
             error = passError
+        elif (existingEmail):
+            error = "An account with email \"" + email + "\" already exists"
         elif (password != confirm):
             error = "Password and confirm password must match."
         else:

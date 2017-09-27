@@ -1,6 +1,6 @@
 import pymysql
 from flask import Flask, url_for, render_template, request, jsonify, redirect, flash
-from validate_email import validate_email
+
 
 def connect():
     db = pymysql.connect(host='localhost', port=3306, user='root',
@@ -24,6 +24,19 @@ def check_user(email, password):
     disconnect(db, cursor)
     return row;
 
+def user_exists(email):
+    db, cursor = connect()
+
+    query = "SELECT email FROM users WHERE email = '%(email)s'" % locals()
+    cursor.execute(query)
+    row = cursor.fetchone()
+
+    disconnect(db, cursor)
+
+    if (row == None):
+        return False
+    else:
+        return True
 
 def add_user(email, password):
     error = None
