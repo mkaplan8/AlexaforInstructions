@@ -37,6 +37,8 @@ def register():
     error = None
     success = False
     if request.method == 'POST':
+        firstname = request.form["firstname"]
+        lastname = request.form["lastname"]
         email = request.form["email"]
         password = request.form["password"]
         confirm = request.form["confirm"]

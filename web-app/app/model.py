@@ -24,7 +24,7 @@ def check_user(email, password):
     disconnect(db, cursor)
     return row;
 
-def user_exists(email):
+def email_exists(email):
     db, cursor = connect()
 
     query = "SELECT email FROM users WHERE email = '%(email)s'" % locals()
@@ -38,11 +38,25 @@ def user_exists(email):
     else:
         return True
 
-def add_user(email, password):
+def username_exists(email):
+    db, cursor = connect()
+
+    query = "SELECT email FROM users WHERE email = '%(email)s'" % locals()
+    cursor.execute(query)
+    row = cursor.fetchone()
+
+    disconnect(db, cursor)
+
+    if (row == None):
+        return False
+    else:
+        return True
+
+def add_user(firstname, lastname, email, username, password):
     error = None
     db, cursor = connect()
     try:
-        query = "INSERT INTO users (email, password) VALUES ('%(email)s', '%(password)s')" % locals()
+        query = "INSERT INTO users (firstname, lastname, email, password) VALUES ('%(firstname)s', '%(lastname)s', '%(email)s', '%(password)s')" % locals()
         cursor.execute(query)
         db.commit()
     except:
