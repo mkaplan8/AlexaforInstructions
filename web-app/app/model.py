@@ -28,8 +28,8 @@ def add_user(firstname, lastname, email, username, password):
         query = "INSERT INTO users (firstname, lastname, email, username, password) VALUES ('%(firstname)s', '%(lastname)s', '%(email)s', '%(username)s', '%(password)s')" % locals()
         cursor.execute(query)
         db.commit()
-    except:
-        error = "A database error has occurred. Please try again in a few minutes."
+    except Exception as e:
+        error = "A database error has occurred. " + str(e)
     disconnect(db, cursor)
 
     if (error):
@@ -37,15 +37,17 @@ def add_user(firstname, lastname, email, username, password):
     else:
         return(True, error);
 
-def add_task(title, materials, steps, visibility):
+def add_task(authorID, title, materials, steps, visibility):
     error = None
     db, cursor = connect()
     try:
-        query = "INSERT INTO tasks (title, materials, steps, visibility) VALUES ('%(title)s', '%(materials)s', '%(steps)s', '%(visibility)s')" % locals()
+        query = "INSERT INTO tasks (author_id, title, materials, steps, visibility) VALUES ((SELECT id FROM users WHERE id = '%(authorID)s'), '%(title)s', '%(materials)s', '%(steps)s', %(visibility)s)" % locals()
+        cursor.execute(query)
+        query = "INSERT INTO owners (user_id, task_id) VALUES ((SELECT id FROM users WHERE id = '%(authorID)s'), (SELECT id FROM tasks ORDER BY id DESC LIMIT 1))" % locals()
         cursor.execute(query)
         db.commit()
-    except:
-        error = "A database error has occurred. Please try again in a few minutes."
+    except Exception as e:
+        error = "A database error has occurred. " + str(e)
     disconnect(db, cursor)
 
     if (error):
@@ -64,6 +66,21 @@ def get_user(queryType, query):
     disconnect(db, cursor)
     return row
 
+def get_task(queryType, query):
+    db, cursor = connect()
+    query = "SELECT * FROM tasks WHERE %(queryType)s = '%(query)s'" % locals()
+    cursor.execute(query)
+    row = cursor.fetchone()
+    disconnect(db, cursor)
+    return row
+
+def get_tasks(username):
+    db, cursor = connect()
+    query = "SELECT * FROM tasks WHERE %(queryType)s = '%(query)s'" % locals()
+    cursor.execute(query)
+    row = cursor.fetchone()
+    disconnect(db, cursor)
+    return row
 
 ### --- BOOLEAN FUNCTIONS: --- ###
 

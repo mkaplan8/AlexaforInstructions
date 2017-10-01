@@ -10,7 +10,7 @@ function datetime() {
 setInterval(datetime,1);
 var i = 4;
 function newStep() {
-    $("#man-up").append('<div class="stacked"><label for="step'+i+'">Step '+i+': </label><textarea class="step" id="step'+i+'" name="step'+i+'"></textarea></div>');
+    $("#man-up").append('<div class="stacked"><label for="step'+i+'">Step '+i+': </label><textarea class="step" id="step'+i+'" name="step'+i+'" required></textarea></div>');
     i++;
 }
 $("#more-steps").on("click", newStep);

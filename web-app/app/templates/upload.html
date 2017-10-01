@@ -10,8 +10,13 @@
         <br>
         <span>Alexa for Instructions</span>
         <div id="welcome-message">
-            <p>Welcome Back, {{fname.capitalize()}}</p>
+            <p>Welcome Back</p>
             <p id="date-time"></p>
+        </div>
+        <div id="nav-container">
+            <a class="nav-pages" href="/home">Home</a>
+            <a class="nav-pages" href="/mytasks">Uploads</a>
+            <a class="nav-pages" href="/logout">Log Off</a>
         </div>
     </div>
     <form id="upload-form" action="" method="post" name="upload">
@@ -19,32 +24,43 @@
             <h2>Manual Upload</h2>
             <div class="stacked">
                 <label for="fname">Task Title:</label>
-                <textarea id="tname" name="titlename" placeholder="Type a title name..."></textarea>
+                <input id="tname" type="text" name="title" placeholder="Type a title name..."></input>
             </div>
 
             <div class="stacked">
                 <label for="fname">Materials:</label>
-                <textarea id="mats" name="materials" placeholder="List necessary materials by comma..."></textarea>
+                <textarea id="mats" name="materials" placeholder="List necessary materials by comma..." required></textarea>
             </div>
 
             <div class="stacked">
                 <label for="step1">Step 1:</label>
-                <textarea class="step" id="step1" name="step1"></textarea>
+                <textarea class="step" id="step1" name="step1" required></textarea>
             </div>
 
             <div class="stacked">
                 <label for="step2">Step 2:</label>
-                <textarea class="step" id="step2" name="step2"></textarea>
+                <textarea class="step" id="step2" name="step2" required></textarea>
             </div>
 
             <div class="stacked">
                 <label for="step3">Step 3:</label>
-                <textarea class="step" id="step3" name="step3"></textarea>
+                <textarea class="step" id="step3" name="step3" required></textarea>
             </div>
         </div>
         <div class="container">
-            <button id="more-steps">New Step</button>
-            <button id="submit" onclick="setTimeout(function() {$('.container').html('Success!');}, 1000);">Submit</button>
+            <button type="button" id="more-steps">New Step</button>
+            <button type="submit">Submit</button>
+            <br><br>
+            <label><b>Publish as Private:</b></label>
+            <input type="checkbox" name="visibility">
+            {% if error %}
+            <br><br>
+            <p class="error"><strong>Error:</strong> {{ error }}</p>
+            {% endif %}
+            {% if success %}
+            <br>
+            <p class="error"><strong>{{ success }}</strong></p>
+            {% endif %}
         </div>
     </form>
     <div class="separator">GT Junior Design, Group 7112: AlexaForInstructions</div>

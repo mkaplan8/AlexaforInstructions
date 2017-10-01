@@ -10,7 +10,7 @@
         <br>
         <span>Alexa for Instructions</span>
         <div id="nav-container">
-            <a class="nav-pages" href="/">Home</a>
+            <a class="nav-pages" href="/home">Home</a>
             <a class="nav-pages" href="/login">Sign&nbsp;in</a>
         </div>
     </div>
@@ -48,6 +48,10 @@
             {% if error %}
             <br>
             <p class="error"><strong>Error:</strong> {{ error }}</p>
+            {% endif %}
+            {% if success %}
+            <br>
+            <p class="error"><strong>{{ success }}</strong></p>
             {% endif %}
         </form>
     </div>

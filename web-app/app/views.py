@@ -1,31 +1,45 @@
 from app import app
 from app import model
 from flask import Flask, url_for, render_template, request, jsonify, redirect, flash
-from wtforms import Form, BooleanField, TextField, PasswordField, validators
 from passlib.hash import sha256_crypt
 
+session = {
+    "userID": "",
+    "username": "",
+    "firstname": ""
+}
+
 @app.route("/")
+@app.route("/home")
 def home():
     return render_template("index.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    error = success = isEmail = None
+    error = success = user = isEmail = None
     if request.method == "POST":
         user = request.form["user"]
         password = request.form["password"]
         isEmail = True if ("@" in user) else False
         success, error = model.valid_user(user, isEmail, password)
 
-    if (error):
-        return render_template("login.html", error=error)
+    if (success):
+        userInfo = model.get_user("email", user) if isEmail else model.get_user("username", user)
+        session["userID"] = userInfo["id"]
+        session["username"] = userInfo["username"]
+        session["firstname"] = userInfo["firstname"]
+        return redirect(url_for("upload"))
     else:
-        if (success):
-            userInfo = model.get_user("email", user) if isEmail else model.get_user("username", user)
-            return render_template("upload.html", fname=userInfo['firstname'])
-        else:
-            return render_template("login.html")
+        return render_template("login.html", error=error)
+
+
+@app.route("/logout")
+def logout():
+    session["userID"] = ""
+    session["username"] = ""
+    session["firstname"] = ""
+    return redirect(url_for("home"))
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -55,15 +69,39 @@ def register():
         else:
             success, error = model.add_user(firstname, lastname, email, username, password)
 
-    if (error):
-        return render_template("register.html", error=error)
+    if (success):
+        return render_template("register.html", success="Successful!")
     else:
-        if (success):
-            return render_template("upload.html", fname=firstname)
-        else:
-            return render_template("register.html", error=error)
+        return render_template("register.html", error=error)
 
 
-@app.route("/upload")
+@app.route("/upload", methods=["GET", "POST"])
 def upload():
-    return render_template("upload.html", fname="testing")
+    error = success = None
+    if (session["username"] != ""):
+        if request.method == "POST":
+            title = request.form["title"]
+            materials = request.form["materials"]
+            visibility = 1 if (request.form.get("visibility") == "on") else 0
+            steps = ""
+            try:
+                for i in range(1, 100):
+                    if (request.form["step"+str(i)] == ""):
+                        error = "Steps cannot be empty."
+                        break
+                    steps += "~" + request.form["step"+str(i)]
+            except:
+                pass
+            if (title == ""):
+                error = "Title cannot be empty."
+            elif (materials == ""):
+                error = "Materials cannot be empty."
+            else:
+                success, error = model.add_task(session["userID"], title, materials, steps, visibility)
+
+        if (success):
+            return render_template("upload.html", success="Successful!")
+        else:
+            return render_template("upload.html", error=error)
+    else:
+        return render_template("upload.html", error="You are not logged in, you should not be able to see this.")
