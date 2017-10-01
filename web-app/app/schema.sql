@@ -9,10 +9,12 @@ CREATE TABLE alexaforinstructions.users (
     email VARCHAR(255) NOT NULL,
     username VARCHAR(45) NOT NULL,
     password VARCHAR(45) NOT NULL,
+    UNIQUE(email),
+    UNIQUE(username),
     PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS alexaforinstructions.tasks (
+CREATE TABLE alexaforinstructions.tasks (
     id INT NOT NULL AUTO_INCREMENT,
     author_id INT(11),
     title VARCHAR(255) NOT NULL,
@@ -25,14 +27,14 @@ CREATE TABLE IF NOT EXISTS alexaforinstructions.tasks (
         ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS alexaforinstructions.owners (
+CREATE TABLE alexaforinstructions.owners (
     user_id INT(11) NOT NULL,
     task_id INT(11) NOT NULL,
     PRIMARY KEY (user_id, task_id),
     FOREIGN KEY (user_id) REFERENCES users(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-    FOREIGN KEY (task_id) REFERENCES users(id)
+    FOREIGN KEY (task_id) REFERENCES tasks(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 ) ENGINE=InnoDB;

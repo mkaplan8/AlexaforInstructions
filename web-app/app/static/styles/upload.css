@@ -18,6 +18,10 @@ a.nav-pages:hover {
 a.nav-pages:active {
     color: whitesmoke;
 }
+
+#nav-container {
+
+}
 #welcome-message {
     margin-right: 10px;
     float: right;
