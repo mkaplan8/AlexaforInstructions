@@ -74,13 +74,13 @@ def get_task(queryType, query):
     disconnect(db, cursor)
     return row
 
-def get_tasks(username):
+def get_tasks(userID):
     db, cursor = connect()
-    query = "SELECT * FROM tasks WHERE %(queryType)s = '%(query)s'" % locals()
+    query = "SELECT * FROM tasks WHERE author_id = '%(userID)s'" % locals()
     cursor.execute(query)
-    row = cursor.fetchone()
+    rows = cursor.fetchall()
     disconnect(db, cursor)
-    return row
+    return rows
 
 ### --- BOOLEAN FUNCTIONS: --- ###
 

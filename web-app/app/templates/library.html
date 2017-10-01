@@ -1,0 +1,42 @@
+{% extends "base.html" -%}
+
+{% block head -%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/pages.css') }}">
+{% endblock head -%}
+
+{% block content -%}
+<div class="wrapper">
+    <div class="header">
+        <br>
+        <span>Alexa for Instructions</span>
+        <div id="welcome-message">
+            <p>Welcome Back</p>
+            <p id="date-time"></p>
+        </div>
+        <div id="nav-container">
+            <a class="nav-pages" href="/home">Home</a>
+            <a class="nav-pages" href="/upload">Upload</a>
+            <a class="nav-pages" href="/logout">Log Off</a>
+        </div>
+    </div>
+    <div class="container">
+        <table id="tasks-table" class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Materials</th>
+                    <th>Steps</th>
+                    <th>Visibility</th>
+                </tr>
+            </thead>
+            <tbody id="tasks-data">
+            </tbody>
+        </table>
+    </div>
+    <div class="separator">GT Junior Design, Group 7112: AlexaForInstructions</div>
+</div>
+{% endblock content -%}
+
+{% block js -%}
+<script src="{{url_for('static', filename='js/library.js')}}"></script>
+{% endblock js -%}

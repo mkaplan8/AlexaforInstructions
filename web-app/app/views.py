@@ -77,8 +77,8 @@ def register():
 
 @app.route("/upload", methods=["GET", "POST"])
 def upload():
-    error = success = None
     if (session["username"] != ""):
+        error = success = None
         if request.method == "POST":
             title = request.form["title"]
             materials = request.form["materials"]
@@ -89,7 +89,7 @@ def upload():
                     if (request.form["step"+str(i)] == ""):
                         error = "Steps cannot be empty."
                         break
-                    steps += "~" + request.form["step"+str(i)]
+                    steps += "<~>" + request.form["step"+str(i)]
             except:
                 pass
             if (title == ""):
@@ -104,4 +104,15 @@ def upload():
         else:
             return render_template("upload.html", error=error)
     else:
-        return render_template("upload.html", error="You are not logged in, you should not be able to see this.")
+        return redirect(url_for("home"))
+
+@app.route("/library")
+def library():
+    if (session["username"] != ""):
+        return render_template("library.html")
+    else:
+        return redirect(url_for("home"))
+
+@app.route('/library/tasks')
+def make_poi_report():
+    return jsonify({"tasks": model.get_tasks(session["userID"])})
