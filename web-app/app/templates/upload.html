@@ -1,0 +1,72 @@
+{% extends "base.html" -%}
+
+{% block head -%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/pages.css') }}">
+{% endblock head -%}
+
+{% block content -%}
+<div class="wrapper">
+    <div class="header">
+        <br>
+        <span>Alexa for Instructions</span>
+        <div id="welcome-message">
+            <p>Welcome Back</p>
+            <p id="date-time"></p>
+        </div>
+        <div id="nav-container">
+            <a class="nav-pages" href="/home">Home</a>
+            <a class="nav-pages" href="/library">Library</a>
+            <a class="nav-pages" href="/logout">Log Off</a>
+        </div>
+    </div>
+    <form id="upload-form" action="" method="post" name="upload">
+        <div id="man-up" class="container">
+            <h2>Manual Upload</h2>
+            <div class="stacked">
+                <label for="fname">Task Title:</label>
+                <input id="tname" type="text" name="title" placeholder="Type a title name..."></input>
+            </div>
+
+            <div class="stacked">
+                <label for="fname">Materials:</label>
+                <textarea id="mats" name="materials" placeholder="List necessary materials by comma..." required></textarea>
+            </div>
+
+            <div class="stacked">
+                <label for="step1">Step 1:</label>
+                <textarea class="step" id="step1" name="step1" required></textarea>
+            </div>
+
+            <div class="stacked">
+                <label for="step2">Step 2:</label>
+                <textarea class="step" id="step2" name="step2" required></textarea>
+            </div>
+
+            <div class="stacked">
+                <label for="step3">Step 3:</label>
+                <textarea class="step" id="step3" name="step3" required></textarea>
+            </div>
+        </div>
+        <div class="container">
+            <button type="button" id="more-steps">New Step</button>
+            <button type="submit">Submit</button>
+            <br><br>
+            <label><b>Publish as Private:</b></label>
+            <input type="checkbox" name="visibility">
+            {% if error %}
+            <br><br>
+            <p class="error"><strong>Error:</strong> {{ error }}</p>
+            {% endif %}
+            {% if success %}
+            <br>
+            <p class="error"><strong>{{ success }}</strong></p>
+            {% endif %}
+        </div>
+    </form>
+    <div class="separator">GT Junior Design, Group 7112: AlexaForInstructions</div>
+</div>
+{% endblock content -%}
+
+{% block js -%}
+<script src="{{url_for('static', filename='js/upload.js')}}"></script>
+{% endblock js -%}

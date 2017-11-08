@@ -1,0 +1,61 @@
+{% extends "base.html" -%}
+
+{% block head -%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/logreg.css') }}">
+{% endblock head -%}
+
+{% block content -%}
+<div class="wrapper">
+    <div class="header">
+        <br>
+        <span>Alexa for Instructions</span>
+        <div id="nav-container">
+            <a class="nav-pages" href="/home">Home</a>
+            <a class="nav-pages" href="/login">Sign&nbsp;in</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <form id="reg-form" action="" method="post" name="register">
+            <h2>Registration Form&nbsp;&#9874;</h2>
+            <label><b>First Name</b></label>
+            <input type="text" placeholder="Enter First Name" name="firstname" required>
+
+            <label><b>Last Name</b></label>
+            <input type="text" placeholder="Enter Last Name" name="lastname" required>
+
+            <label><b>Email</b></label>
+            <input type="text" placeholder="Enter Valid Email" name="email" required>
+
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" required>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+
+            <label><b>Confirm Password</b></label>
+            <input type="password" placeholder="Repeat Password" name="confirm" required>
+
+            <!-- <input type="checkbox" checked="checked"> Remember me -->
+
+            <!-- <p>By creating an account you agree to our <a href="#">Terms &amp; Privacy</a>.</p> -->
+
+            <div class="clearfix">
+                <button type="button" class="cancelbtn">Cancel</button>
+                <button type="submit" class="signupbtn">Sign Up</button>
+            </div>
+
+            {% if error %}
+            <br>
+            <p class="error"><strong>Error:</strong> {{ error }}</p>
+            {% endif %}
+            {% if success %}
+            <br>
+            <p class="error"><strong>{{ success }}</strong></p>
+            {% endif %}
+        </form>
+    </div>
+
+    <div class="separator">GT Junior Design, Group 7112: AlexaForInstructions</div>
+</div>
+{% endblock content -%}

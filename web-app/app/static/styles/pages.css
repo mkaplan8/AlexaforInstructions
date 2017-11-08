@@ -18,6 +18,7 @@ a.nav-pages:hover {
 a.nav-pages:active {
     color: whitesmoke;
 }
+
 #welcome-message {
     margin-right: 10px;
     float: right;
@@ -50,4 +51,8 @@ textarea {
 .step {
     padding: 10px;
     height: 40px;
+}
+
+#tasks-data tr.even:hover {
+    background-color: lightgreen;
 }
