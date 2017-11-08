@@ -30,7 +30,7 @@ def welcome():
     returns: (question) Our welcome message with reprompt if needed.
     """
     global place, end, instructions
-    if place, end == 0, 0 and instructions = []:
+    if (place, end) != (0, 0) and instructions != []:
         welcome_msg = render_template('old_session')
     else:
         place, end = 0,0
