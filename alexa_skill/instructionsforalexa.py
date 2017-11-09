@@ -197,7 +197,10 @@ def wait(waitTime):
     returns
     msg: (str) The current step after waiting for correct amount of time
     """
-    return 
+
+    waitTimestring = str(waitTime)
+
+    return statement(waitTimeString)
 
 
 @ask.session_ended
