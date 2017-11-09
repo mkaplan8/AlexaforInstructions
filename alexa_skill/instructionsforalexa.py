@@ -190,6 +190,16 @@ def save():
     """
     return statement('Session Saved. Goodbye.')
 
+@ask.intent('WaitIntent')
+def wait(waitTime):
+    """
+    Tells the skill to wait (waitTIme) amount of time before repromting the user for an instruction
+    returns
+    msg: (str) The current step after waiting for correct amount of time
+    """
+    return 
+
+
 @ask.session_ended
 def session_ended():
     """
