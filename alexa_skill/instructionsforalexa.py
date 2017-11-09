@@ -4,6 +4,7 @@ from flask import Flask, render_template, g
 from flask_ask import Ask, statement, question, session
 import json
 import sqlite3
+import time as t
 
 #initialize global variables
 DATABASE = 'tasks.db'
@@ -193,14 +194,31 @@ def save():
 @ask.intent('WaitIntent')
 def wait(waitTime):
     """
-    Tells the skill to wait (waitTIme) amount of time before repromting the user for an instruction
+    Tells the skill to wait (waitTIme) amount of time before repromting the user for an instructionco
     returns
     msg: (str) The current step after waiting for correct amount of time
     """
 
-    waitTimestring = str(waitTime)
+    waitTimeString = str(waitTime)
+    time = ''
+    interval = ''
 
-    return statement(waitTimeString)
+    # time given was in seconds/minutes/hours
+    if 'T' in waitTimeString:
+        timeList = waitTimeString.split('T')
+        totalTime = timeList[1]
+        time = int(totalTime[:-1])
+        interval = totalTime[len(totalTime) - 1:]
+
+        # convert minutes to seconds
+        if interval == 'M':
+            time = time * 60
+        # convert hours to seconds
+        if interval == 'H':
+            time = (time * 60) * 60
+
+    t.sleep(time)
+    return question('Continue to next step or repeat current step')
 
 
 @ask.session_ended
