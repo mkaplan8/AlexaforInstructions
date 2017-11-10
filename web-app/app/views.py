@@ -114,5 +114,5 @@ def library():
         return redirect(url_for("home"))
 
 @app.route('/library/tasks')
-def make_poi_report():
+def getTasks():
     return jsonify({"tasks": model.get_tasks(session["userID"])})

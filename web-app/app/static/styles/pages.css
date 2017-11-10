@@ -53,6 +53,13 @@ textarea {
     height: 40px;
 }
 
-#tasks-data tr.even:hover {
-    background-color: lightgreen;
+#tasks-data tr.even {
+    background-color: #D7CCC8;
+}
+#tasks-data tr.odd {
+    background-color: #BCAAA4;
+}
+#tasks-data tr.even:hover,
+#tasks-data tr.odd:hover {
+    background-color: #A1887F;
 }
