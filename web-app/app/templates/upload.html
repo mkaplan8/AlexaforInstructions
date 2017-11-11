@@ -53,6 +53,8 @@
             <br><br>
             <label><b>Publish as Private:</b></label>
             <input type="checkbox" name="visibility">
+            <br><br><input type="file" id="file-upload" onchange="parseFile()"> (We'll do our best to parse it)
+            <br><br><p id="file-info"></p>
             {% if error %}
             <br><br>
             <p class="error"><strong>Error:</strong> {{ error }}</p>

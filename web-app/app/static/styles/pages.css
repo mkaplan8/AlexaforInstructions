@@ -45,6 +45,10 @@ a.nav-pages:active {
     padding: 10px;
 }
 
+#tname {
+    width: 300px;
+}
+
 textarea {
     width: 400px;
 }
