@@ -35,65 +35,49 @@ def main():
                             ); '''
 
     create_tasks_table = ''' CREATE TABLE IF NOT EXISTS tasks (
-                                    id integer PRIMARY KEY NOT NULL,
-                                    author_id integer NOT NULL,
-                                    title text NOT NULL,
-                                    materials text NOT NULL,
-                                    steps text NOT NULL,
-                                    visibility TINYINT(1) NOT NULL,
-                                    FOREIGN KEY (author_id) REFERENCES users(id)
-                                        ON DELETE CASCADE
-                                        ON UPDATE CASCADE
-                                ); '''
+                                id integer PRIMARY KEY NOT NULL,
+                                author_id integer NOT NULL,
+                                title text NOT NULL,
+                                materials text NOT NULL,
+                                steps text NOT NULL,
+                                visibility TINYINT(1) NOT NULL,
+                                FOREIGN KEY (author_id) REFERENCES users(id)
+                                    ON DELETE CASCADE
+                                    ON UPDATE CASCADE
+                            ); '''
 
     create_owners_table = ''' CREATE TABLE IF NOT EXISTS owners (
-                                    user_id integer NOT NULL,
-                                    task_id integer NOT NULL,
-                                    PRIMARY KEY (user_id, task_id),
-                                    FOREIGN KEY (user_id) REFERENCES users(id)
-                                        ON DELETE CASCADE
-                                        ON UPDATE CASCADE,
-                                    FOREIGN KEY (task_id) REFERENCES tasks(id)
-                                        ON DELETE CASCADE
-                                        ON UPDATE CASCADE
-                                ); '''
+                                user_id integer NOT NULL,
+                                task_id integer NOT NULL,
+                                PRIMARY KEY (user_id, task_id),
+                                FOREIGN KEY (user_id) REFERENCES users(id)
+                                    ON DELETE CASCADE
+                                    ON UPDATE CASCADE,
+                                FOREIGN KEY (task_id) REFERENCES tasks(id)
+                                    ON DELETE CASCADE
+                                    ON UPDATE CASCADE
+                            ); '''
 
-    insert_users_admin = ''' INSERT INTO users (
-                                    firstname, lastname, email, username, password
-                                ) VALUES (
-                                    "admin", "admin", "admin@example.com", "admin", "admin"
-                                ); '''
+    insert_user_admin = ''' INSERT INTO users (
+                                firstname, lastname, email, username, password
+                            ) VALUES (
+                                "admin", "admin", "admin@example.com", "admin", "admin"
+                            ); '''
 
-    insert_tasks_admin = ''' INSERT INTO tasks (
-                                    author_id, title, materials, steps, visibility
-                                ) VALUES (
-                                    (SELECT id from users order by id desc limit 1), "How to Admin", "Administrative Access", '["Ban users that are annoying.", "Ban users that are not annoying.", "Demonstrate unrivaled power."]', 1
-                                ); '''
+    insert_task_admin = ''' INSERT INTO tasks (
+                                author_id, title, materials, steps, visibility
+                            ) VALUES (
+                                (SELECT id from users order by id desc limit 1), "How to Admin", "Administrative Access", '["Ban users that are annoying.", "Ban users that are not annoying.", "Demonstrate unrivaled power."]', 1
+                            ); '''
 
     execute(create_tasks_table)
     execute(create_users_table)
     execute(create_owners_table)
-    execute(insert_users_admin)
-    execute(insert_tasks_admin)
+    execute(insert_user_admin)
+    execute(insert_task_admin)
 
     else:
         print("Error! cannot create the database connection.")
 
 if __name__ == '__main__':
     main()
-
-db, cursor = connect()
-
-cursor.execute("SELECT * FROM users")
-rows = cursor.fetchall()
-for row in rows:
-    print(row)
-
-cursor.execute("SELECT * FROM tasks")
-rows = cursor.fetchall()
-for row in rows:
-    print(row)
-
-disconnect(db, cursor)
-
-print("Database A4I initialized.")
