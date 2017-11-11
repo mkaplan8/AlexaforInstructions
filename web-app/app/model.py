@@ -1,16 +1,23 @@
-import pymysql
-from flask import Flask, url_for, render_template, request, jsonify, redirect, flash
+# import pymysql
+import sqlite3
+from sqlite3 import Error
 from validate_email import validate_email
+import os.path
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(BASE_DIR, "a4i.db")
 
 
-### --- CONNECT FUNCTIONS: --- ###
+### --- CONNECT/CREATE FUNCTIONS: --- ###
 
 def connect():
-    db = pymysql.connect(host="localhost", port=3306, user="root",
-                         passwd="root", db="alexaforinstructions",
-                         cursorclass=pymysql.cursors.DictCursor)
-    cursor = db.cursor()
-    return db, cursor
+    try:
+        db = sqlite3.connect(db_path)
+        cursor = db.cursor()
+        return db, cursor
+    except Error as e:
+        print(e)
+    return None
 
 def disconnect(db, cursor):
     cursor.close()
@@ -25,10 +32,10 @@ def add_user(firstname, lastname, email, username, password):
     lastname = lastname.capitalize()
     db, cursor = connect()
     try:
-        query = "INSERT INTO users (firstname, lastname, email, username, password) VALUES ('%(firstname)s', '%(lastname)s', '%(email)s', '%(username)s', '%(password)s')" % locals()
+        query = "INSERT INTO users(firstname, lastname, email, username, password) VALUES('%(firstname)s', '%(lastname)s', '%(email)s', '%(username)s', '%(password)s')" % locals()
         cursor.execute(query)
         db.commit()
-    except Exception as e:
+    except Error as e:
         error = "A database error has occurred. " + str(e)
     disconnect(db, cursor)
 
@@ -41,12 +48,12 @@ def add_task(authorID, title, materials, steps, visibility):
     error = None
     db, cursor = connect()
     try:
-        query = "INSERT INTO tasks (author_id, title, materials, steps, visibility) VALUES ((SELECT id FROM users WHERE id = '%(authorID)s'), '%(title)s', '%(materials)s', '%(steps)s', %(visibility)s)" % locals()
+        query = "INSERT INTO tasks(author_id, title, materials, steps, visibility) VALUES((SELECT id FROM users WHERE id = '%(authorID)s'), '%(title)s', '%(materials)s', '%(steps)s', %(visibility)s)" % locals()
         cursor.execute(query)
-        query = "INSERT INTO owners (user_id, task_id) VALUES ((SELECT id FROM users WHERE id = '%(authorID)s'), (SELECT id FROM tasks ORDER BY id DESC LIMIT 1))" % locals()
+        query = "INSERT INTO owners(user_id, task_id) VALUES((SELECT id FROM users WHERE id = '%(authorID)s'), (SELECT id FROM tasks ORDER BY id DESC LIMIT 1))" % locals()
         cursor.execute(query)
         db.commit()
-    except Exception as e:
+    except Error as e:
         error = "A database error has occurred. " + str(e)
     disconnect(db, cursor)
 
@@ -170,5 +177,6 @@ def valid_pass(password, confirm):
         return(False, error)
     else:
         return(True, error);
+
 
 ### --- HELPER FUNCTIONS: --- ###

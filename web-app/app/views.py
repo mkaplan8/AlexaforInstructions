@@ -1,13 +1,14 @@
 from app import app
 from app import model
-from flask import Flask, url_for, render_template, request, jsonify, redirect, flash
-from passlib.hash import sha256_crypt
+from flask import Flask, url_for, render_template, request, jsonify, redirect
+
 
 session = {
     "userID": "",
     "username": "",
     "firstname": ""
 }
+
 
 @app.route("/")
 @app.route("/home")
@@ -26,9 +27,9 @@ def login():
 
     if (success):
         userInfo = model.get_user("email", user) if isEmail else model.get_user("username", user)
-        session["userID"] = userInfo["id"]
-        session["username"] = userInfo["username"]
-        session["firstname"] = userInfo["firstname"]
+        session["userID"] = userInfo[0]
+        session["username"] = userInfo[4]
+        session["firstname"] = userInfo[5]
         return redirect(url_for("upload"))
     else:
         return render_template("login.html", error=error)
@@ -83,15 +84,16 @@ def upload():
             title = request.form["title"]
             materials = request.form["materials"]
             visibility = 1 if (request.form.get("visibility") == "on") else 0
-            steps = ""
+            steps = '["'+ request.form["step1"] + '"'
             try:
-                for i in range(1, 100):
+                for i in range(2, 100):
                     if (request.form["step"+str(i)] == ""):
                         error = "Steps cannot be empty."
                         break
-                    steps += "<~>" + request.form["step"+str(i)]
+                    steps += ', "' + request.form["step"+str(i)] + '"'
             except:
                 pass
+            steps += "]"
             if (title == ""):
                 error = "Title cannot be empty."
             elif (materials == ""):

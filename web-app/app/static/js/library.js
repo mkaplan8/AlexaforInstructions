@@ -13,27 +13,22 @@ setInterval(datetime,1);
 $.get('/library/tasks').done(function(data) {
     data.tasks.forEach(function(row) {
         var visibility = "";
-        if (row.visibility == 0){
+        if (row[5] == 0) {
             visibility = "Public";
         } else {
             visibility = "Private";
         }
-        var stepsData = row.steps.split("<~>");
-        console.log(stepsData);
-        var steps = "";
-        for (i = 1; i < stepsData.length; i++) {
-            steps += "(Step " + i + ": " + stepsData[i] + ")\n";
-        }
         $("#tasks-data").append(`
             <tr>
-                <th>`+ row.title +`</th>
-                <th>`+ row.materials +`</th>
-                <th>`+ steps +`</th>
+                <th>`+ row[2] +`</th>
+                <th>`+ row[3] +`</th>
+                <th>`+ row[4] +`</th>
                 <th>`+ visibility +`</th>
             </tr>
         `);
     });
     $("#tasks-table").DataTable();
 }).fail(function(res){
+    $("#tasks-table").DataTable();
     console.log(res.responseText);
 });
