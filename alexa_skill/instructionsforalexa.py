@@ -220,6 +220,38 @@ def wait(waitTime):
     t.sleep(time)
     return question('Continue to next step or repeat current step')
 
+@ask.intent('SkipToWordIntent')
+    """
+    jumps to a step that has a certain keyword
+
+    returns
+        step that the word is in if word is in instructions
+        msg: (statement) Make another word choice if word is not there
+    """
+def skipToWord(keyword):
+    brokenDownInstruction = []
+    instructionNumber = 0
+    foundKeyWord = False
+    keyword = keyword.upper()
+    print keyword
+
+
+    for instruction in instructions:
+        # print 'current instruction: ' + str(instruction).upper()
+        brokenDownInstruction = str(instruction).upper().split()
+        for word in brokenDownInstruction:
+            print word
+            if word == keyword:
+                foundKeyWord = True
+                instructionNumber = brokenDownInstruction[1]
+                instructionNumber = instructionNumber[:1]
+
+    if foundKeyWord:
+        return jump(int(instructionNumber))
+    else:
+        return statement('Could not find that word in the instructions, please try again')
+
+
 
 @ask.session_ended
 def session_ended():
