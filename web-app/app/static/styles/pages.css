@@ -50,3 +50,12 @@ a.nav-pages:active {
 #tasks-data tr.odd:hover {
     background-color: #A1887F;
 }
+
+.remove-step {
+    padding-right: 5px;
+    color: red;
+    cursor: pointer;
+}
+.remove-step:hover::after {
+    content: "Remove";
+}

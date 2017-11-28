@@ -5,7 +5,7 @@ Requirements:
 - Computer
 - A4I web account
 
-First, navigate to a web browser and open A4I's website.
+First, navigate to a web browser and open A4I website.
 
 Then, log into the A4I website.
 

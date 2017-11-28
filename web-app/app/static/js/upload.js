@@ -1,9 +1,27 @@
-var i = 4;
+removeStepEvent();
+
 function newStep() {
-    $("#man-up").append('<div class="stacked"><label for="step'+i+'">Step '+i+': </label><textarea class="step" id="step'+i+'" name="step'+i+'" required></textarea></div>');
-    i++;
+    var stepsShown = $(".stacked.step").length;
+    $("#man-up").append('<div class="stacked step"><span id="'+(++stepsShown)+'" class="remove-step">&#9746; </span><label for="step'+(stepsShown)+'">Step '+(stepsShown)+': </label><textarea class="step" id="step'+(stepsShown)+'" name="step'+(stepsShown)+'" required></textarea></div>');
+    removeStepEvent();
 }
 $("#more-steps").on("click", newStep);
+
+function removeStepEvent() {
+    $(".remove-step").on("click", function() {
+        $(this).parent().remove();
+        var steps = [];
+        $(".stacked.step textarea").each(function() {
+            steps.push($(this).val());
+        });
+        var stepsLeft = $(".stacked.step").length;
+        $(".stacked.step").remove();
+        for (var i = 0; i < stepsLeft; i++) {
+            $("#more-steps").click();
+            $("#step"+(i+1)).val(steps[i]);
+        }
+    });
+}
 
 function parseFile() {
     var x = document.getElementById("file-upload");
@@ -33,16 +51,16 @@ function parseFile() {
     setTimeout(function(){
         document.getElementById("tname").value = "How to upload to A4I web-app using a file";
         document.getElementById("mats").innerHTML = "File, Computer, A4I web account";
-        document.getElementById("step1").innerHTML = "Navigate to a web browser and open A4I's website.";
+        document.getElementById("step1").innerHTML = "Navigate to a web browser and open A4I website.";
         document.getElementById("step2").innerHTML = "Log into the A4I website.";
         document.getElementById("step3").innerHTML = 'Go to the "Upload" page.';
         $("#more-steps").click();
-        document.getElementById("step4").innerHTML = 'Click the "Choose File" button';
+        document.getElementById("step4").innerHTML = 'Click the "Choose File" button.';
         $("#more-steps").click();
         document.getElementById("step5").innerHTML = "Select the file that contains the instructions you want to upload.";
         $("#more-steps").click();
         document.getElementById("step6").innerHTML = 'Click "Open".';
         $("#more-steps").click();
         document.getElementById("step7").innerHTML = "Edit anything that was not parsed correctly.";
-    }, 5000);
+    }, 2500);
 }
