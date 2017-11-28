@@ -5,7 +5,6 @@ $(document).ready(function() {
 
     function checkWidth() {
         var windowsize = $window.width();
-        console.log(windowsize);
         if (windowsize < 1070) {
             $("a.nav-pages").addClass("hover-style");
         } else {
@@ -18,5 +17,3 @@ $(document).ready(function() {
     // Bind event listener
     $(window).resize(checkWidth);
 });
-
-$("textarea").resizable();
