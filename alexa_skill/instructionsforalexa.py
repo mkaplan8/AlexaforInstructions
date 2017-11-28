@@ -7,7 +7,7 @@ import sqlite3
 import time as t
 
 #initialize global variables
-DATABASE = 'tasks.db'
+DATABASE = '../web-app/app/a4i.db'
 instructions = []
 place, end = 0,0
 
@@ -82,8 +82,8 @@ def query(task):
 
     print('task: {}'.format(task))
 
-    #find JSON in database and store in result. Store None if not found.
-    statement = 'SELECT * FROM tasks where name="%s"'
+    #find instructions in database and store in result. Store None if not found.
+    statement = 'SELECT * FROM tasks where title="%s"'
 
     #execute statement and store in result
     cur = get_db()
@@ -93,9 +93,10 @@ def query(task):
     except sqlite3.OperationalError:
         result = None
     if len(result) > 0:
-        populate_instructions(result[0][0], json.loads(result[0][1]), json.loads(result[0][2]))
+        populate_instructions(result[0][2], json.loads(result[0][3]), json.loads(result[0][4]))
         msg = 'I found the instructions. Say continue when ready.'
     else:
+        print(result)
         msg = 'I could not find the instructions. Please try another query.'
     return question(msg)
 
@@ -221,6 +222,7 @@ def wait(waitTime):
     return question('Continue to next step or repeat current step')
 
 @ask.intent('SkipToWordIntent')
+def skipToWord(keyword):
     """
     jumps to a step that has a certain keyword
 
@@ -228,19 +230,18 @@ def wait(waitTime):
         step that the word is in if word is in instructions
         msg: (statement) Make another word choice if word is not there
     """
-def skipToWord(keyword):
     brokenDownInstruction = []
     instructionNumber = 0
     foundKeyWord = False
     keyword = keyword.upper()
-    print keyword
+    #print(keyword)
 
 
     for instruction in instructions:
         # print 'current instruction: ' + str(instruction).upper()
         brokenDownInstruction = str(instruction).upper().split()
         for word in brokenDownInstruction:
-            print word
+            #print(word)
             if word == keyword:
                 foundKeyWord = True
                 instructionNumber = brokenDownInstruction[1]
