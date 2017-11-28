@@ -41,7 +41,6 @@ def welcome():
     reprompt_msg = render_template('reprompt')
     return question(welcome_msg).reprompt(reprompt_msg)
 
-
 def populate_instructions(task_name, supp, steps):
     """
     Helper function that fetches our task from DATABASE. Populates the global instructions variable.
@@ -56,7 +55,7 @@ def populate_instructions(task_name, supp, steps):
     """
     msg = 'Here\'s how to {}. You will need'.format(task_name)
     for s in supp:
-        msg = msg + ' ' + s['amount'] + ' ' + s['name'] + ','
+        msg = msg + s
     global instructions
     instructions.append(msg)
     for s in steps:
@@ -93,7 +92,7 @@ def query(task):
     except sqlite3.OperationalError:
         result = None
     if len(result) > 0:
-        populate_instructions(result[0][2], json.loads(result[0][3]), json.loads(result[0][4]))
+        populate_instructions(result[0][2], json.dumps(result[0][3].split(',')), json.loads(result[0][4]))
         msg = 'I found the instructions. Say continue when ready.'
     else:
         print(result)
