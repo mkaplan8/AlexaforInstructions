@@ -4,6 +4,7 @@ from flask import Flask, render_template, g
 from flask_ask import Ask, statement, question, session
 import json
 import sqlite3
+import time
 
 #initialize global variables
 DATABASE = 'tasks.db'
@@ -189,6 +190,35 @@ def save():
         msg: (statement) Goodbye message
     """
     return statement('Session Saved. Goodbye.')
+
+@ask.intent('WaitIntent')
+def wait(waitTime):
+    """
+    Tells the skill to wait (waitTIme) amount of time before repromting the user for an instructionco
+    returns
+    msg: (str) The current step after waiting for correct amount of time
+    """
+
+    waitTimeString = str(waitTime)
+    t = ''
+    interval = ''
+
+    # time given was in seconds/minutes/hours
+    if 'T' in waitTimeString:
+        timeList = waitTimeString.split('T')
+        totalTime = timeList[1]
+        t = int(totalTime[:-1])
+        interval = totalTime[len(totalTime) - 1:]
+
+        # convert minutes to seconds
+        if interval == 'M':
+            t = t * 60
+        # convert hours to seconds
+        if interval == 'H':
+            t = (t * 60) * 60
+
+    time.sleep(t)
+    return question('Continue to next step or repeat current step')
 
 @ask.session_ended
 def session_ended():
