@@ -7,3 +7,4 @@ web-app/__pycache__
 web-app/app/__pycache__
 web-app/app/flask
 web-app/app/pymysql
+Thumbs.db

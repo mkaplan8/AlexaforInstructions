@@ -4,6 +4,7 @@ from flask import Flask, render_template, g
 from flask_ask import Ask, statement, question, session
 import json
 import sqlite3
+import time as t
 
 #initialize global variables
 DATABASE = 'tasks.db'
@@ -189,6 +190,68 @@ def save():
         msg: (statement) Goodbye message
     """
     return statement('Session Saved. Goodbye.')
+
+@ask.intent('WaitIntent')
+def wait(waitTime):
+    """
+    Tells the skill to wait (waitTIme) amount of time before repromting the user for an instructionco
+    returns
+    msg: (str) The current step after waiting for correct amount of time
+    """
+
+    waitTimeString = str(waitTime)
+    time = ''
+    interval = ''
+
+    # time given was in seconds/minutes/hours
+    if 'T' in waitTimeString:
+        timeList = waitTimeString.split('T')
+        totalTime = timeList[1]
+        time = int(totalTime[:-1])
+        interval = totalTime[len(totalTime) - 1:]
+
+        # convert minutes to seconds
+        if interval == 'M':
+            time = time * 60
+        # convert hours to seconds
+        if interval == 'H':
+            time = (time * 60) * 60
+
+    t.sleep(time)
+    return question('Continue to next step or repeat current step')
+
+@ask.intent('SkipToWordIntent')
+    """
+    jumps to a step that has a certain keyword
+
+    returns
+        step that the word is in if word is in instructions
+        msg: (statement) Make another word choice if word is not there
+    """
+def skipToWord(keyword):
+    brokenDownInstruction = []
+    instructionNumber = 0
+    foundKeyWord = False
+    keyword = keyword.upper()
+    print keyword
+
+
+    for instruction in instructions:
+        # print 'current instruction: ' + str(instruction).upper()
+        brokenDownInstruction = str(instruction).upper().split()
+        for word in brokenDownInstruction:
+            print word
+            if word == keyword:
+                foundKeyWord = True
+                instructionNumber = brokenDownInstruction[1]
+                instructionNumber = instructionNumber[:1]
+
+    if foundKeyWord:
+        return jump(int(instructionNumber))
+    else:
+        return statement('Could not find that word in the instructions, please try again')
+
+
 
 @ask.session_ended
 def session_ended():

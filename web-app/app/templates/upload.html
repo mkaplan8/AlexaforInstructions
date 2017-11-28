@@ -9,10 +9,6 @@
     <div class="header">
         <br>
         <span>Alexa for Instructions</span>
-        <div id="welcome-message">
-            <p>Welcome Back</p>
-            <p id="date-time"></p>
-        </div>
         <div id="nav-container">
             <a class="nav-pages" href="/home">Home</a>
             <a class="nav-pages" href="/library">Library</a>
@@ -53,6 +49,8 @@
             <br><br>
             <label><b>Publish as Private:</b></label>
             <input type="checkbox" name="visibility">
+            <br><br><input type="file" id="file-upload" onchange="parseFile()">
+            <br><br><p id="file-info"></p>
             {% if error %}
             <br><br>
             <p class="error"><strong>Error:</strong> {{ error }}</p>

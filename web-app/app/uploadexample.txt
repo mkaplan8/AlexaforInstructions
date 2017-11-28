@@ -1,0 +1,20 @@
+Title: How to upload to A4I web-app using a file
+
+Requirements:
+- File
+- Computer
+- A4I web account
+
+First, navigate to a web browser and open A4I's website.
+
+Then, log into the A4I website.
+
+Next, go to the "Upload" page.
+
+Then, click the "Choose File" button.
+
+Next, select the file that contains the instructions you want to upload.
+
+Then, click "Open".
+
+Finally, edit anything that was not parsed correctly.
