@@ -99,6 +99,7 @@ def upload():
             elif (materials == ""):
                 error = "Materials cannot be empty."
             else:
+                steps.replace("'", "\\'")
                 success, error = model.add_task(session["userID"], title, materials, steps, visibility)
 
         if (success):
