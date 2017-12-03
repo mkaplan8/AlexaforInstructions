@@ -2,7 +2,7 @@
 
 # A4I Installation Guide
 
-## Visual Interface Installation
+## Visual Interface & Alexa Skill Installation
 
 ### Prerequisites and Dependencies
 ***You will need a computer device and access to the internet.***
@@ -20,8 +20,10 @@
 ```
 4. Install dependencies using pip.
 ```
-    $ pip install flask validate_email
+    $ pip install flask flask-ask validate_email
 ```
+
+5. Link the AlexaForInstructions amazon account to your Alexa enabled device.
 
 ### Build
 1. Use the public Github link below to navigate to A4I's source code.
@@ -45,23 +47,25 @@
 ```
 ---
 
-## Audio Interface (Alexa-Skill) Installation
-
-### Prerequisites and Dependencies
-***You will need an Alexa-enabled device and access to the internet.***
-1.
-2.
-3.
-
-### Build
-1.
-2.
-3.
-
+## Audio Interface (Alexa-Skill)
 ### Run
-1.
-2.
-3.
----
+1. Navigate to directory /alexa_skill
+2. Run ngrok and note the https link in the output:
+```
+    $ ngrok http 5000
+```
+3. Run instructions.py.
+```
+    $ python instructions.py
+```
+1. Login to AlexaForInstructions Amazon developer account.
+```
+    https://developer.amazon.com
+```
 
+2. Navigate to the AlexaForInstructions skill configuration.
+
+3. Enter the https link from step 2. into the default endpoint field.
+
+4. Ask Alexa to 'open instructions guide'
 ## Troubleshooting
