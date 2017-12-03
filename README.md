@@ -1,7 +1,10 @@
 # A4I Release Notes
+---
 
+# A4I Installation Guide
+---
 
-## A4I Visual Interface Installation
+## Visual Interface Installation
 
 ### Prerequisites and Dependencies
 ***You will need a computer device and access to the internet.***
@@ -45,7 +48,7 @@
     localhost:5000
 ```
 
-## A4I Audio Interface (Alexa-Skill) Installation
+## Audio Interface (Alexa-Skill) Installation
 
 ### Prerequisites and Dependencies
 ***You will need an Alexa-enabled device and access to the internet.***
@@ -62,3 +65,5 @@
 1.
 2.
 3.
+
+## Troubleshooting
