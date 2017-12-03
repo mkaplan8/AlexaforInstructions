@@ -36,15 +36,14 @@
 2. Run the script named run.py using python.
 ```
     $ python run.py
-
         or
-
     $ ./run.py
 ```
 3. Open up a web browser page to localhost address at port 5000.
 ```
     localhost:5000
 ```
+---
 
 ## Audio Interface (Alexa-Skill) Installation
 
@@ -63,5 +62,6 @@
 1.
 2.
 3.
+---
 
 ## Troubleshooting
