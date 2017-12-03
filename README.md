@@ -1,8 +1,6 @@
-A4I Release Notes
----
+# A4I Release Notes
 
-A4I Installation Guide
----
+# A4I Installation Guide
 
 ## Visual Interface Installation
 
