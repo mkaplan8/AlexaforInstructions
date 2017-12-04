@@ -50,11 +50,15 @@
 ## Audio Interface (Alexa-Skill)
 ### Run
 1. Navigate to directory /alexa_skill
-2. Run ngrok and note the https link in the output:
+2. Download the correct distrubtion of ngrok for your operating system
+```
+    $ https://ngrok.com/download
+```
+3. Run ngrok and note the https link in the output:
 ```
     $ ngrok http 5000
 ```
-3. Run instructions.py.
+4. Run instructions.py.
 ```
     $ python instructions.py
 ```
