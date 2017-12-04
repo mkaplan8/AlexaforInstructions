@@ -1,4 +1,26 @@
 # A4I Release Notes
+Version 1.0
+
+1. Web Application Features
+```
+    1. Users can create and login an account
+    2. Users can upload an instruction set manually using the upload
+    3. Users can upload an instruction set via file upload
+    4. Users can flag uploads as either public or private
+    5. Users can see thier upload history and delete unnecessary uploads
+```
+2. Alexa Skill Feautes
+```
+    1. Users can ask Alexa to open an instruction set
+    2. Users can use keywords like continue and previous to navigate through an instruction set
+    3. Users can use advanced keywords such as skip to step {step number} to skip to a certain step number
+    4. Users can use advanced keywords such as find {keyword} to skip to the first step with a certain word
+    5. Users can use advanced keywords like save and wait to tell Alexa to pause the instruction set for a certain amount of time or to save the current step
+```
+3. Known Bug & Defects
+```
+    1. Alexa may not always completely understand what the user is saying
+```
 
 # A4I Installation Guide
 
@@ -48,6 +70,8 @@
 ---
 
 ## Audio Interface (Alexa-Skill)
+### Prerequisites and Dependencies
+***You will need an alexa enabled device with a internet connection.***
 ### Run
 1. Navigate to directory /alexa_skill
 2. Download the correct distrubtion of ngrok for your operating system
@@ -73,3 +97,4 @@
 
 4. Ask Alexa to 'open instructions guide'
 ## Troubleshooting
+1. If you cannot to Alexa to use the skill make your the URL in the skill configuration starts with https
