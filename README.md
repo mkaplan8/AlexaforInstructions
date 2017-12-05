@@ -97,4 +97,4 @@ Version 1.0
 
 3. Enter the https link from step 2. into the default endpoint field.
 
-4. Ask Alexa to 'open instructions guide'
+4. Ask Alexa to 'open instructions guide'.
