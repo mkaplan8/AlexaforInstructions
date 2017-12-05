@@ -7,9 +7,9 @@ Version 1.0
     2. Users can upload an instruction set manually using the upload
     3. Users can upload an instruction set via file upload
     4. Users can flag uploads as either public or private
-    5. Users can see thier upload history and delete unnecessary uploads
+    5. Users can see their upload history and delete unnecessary uploads
 ```
-2. Alexa Skill Feautes
+2. Alexa Skill Features
 ```
     1. Users can ask Alexa to open an instruction set
     2. Users can use keywords like continue and previous to navigate through an instruction set
@@ -70,15 +70,15 @@ Version 1.0
 ---
 
 ## Audio Interface (Alexa-Skill)
+
 ### Prerequisites and Dependencies
 ***You will need an alexa enabled device with a internet connection.***
-### Run
-1. Navigate to directory /alexa_skill
-2. Download the correct distrubtion of ngrok for your operating system
+1. Navigate to directory /alexa_skill.
+2. Download the correct distrubtion of ngrok for your operating system.
 ```
     $ https://ngrok.com/download
 ```
-3. Run ngrok and note the https link in the output:
+3. Run ngrok and note the https link in the output.
 ```
     $ ngrok http 5000
 ```
@@ -86,6 +86,8 @@ Version 1.0
 ```
     $ python instructions.py
 ```
+
+### Run
 1. Login to AlexaForInstructions Amazon developer account.
 ```
     https://developer.amazon.com
@@ -96,5 +98,3 @@ Version 1.0
 3. Enter the https link from step 2. into the default endpoint field.
 
 4. Ask Alexa to 'open instructions guide'
-## Troubleshooting
-1. If you cannot to Alexa to use the skill make your the URL in the skill configuration starts with https
