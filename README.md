@@ -36,7 +36,7 @@ Version 1.0
 ```
     https://pip.pypa.io/en/stable/installing/
 ```
-3. Open a new command terminal window where get-pip.py lies and install pip (Python Package Index).
+3. Open a new command terminal window to the folder where get-pip.py lies and install pip (Python Package Index).
 ```
     $ python get-pip.py
 ```
