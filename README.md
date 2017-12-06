@@ -74,7 +74,7 @@ Version 1.0
 ### Prerequisites and Dependencies
 ***You will need an alexa enabled device with a internet connection.***
 1. Navigate to directory /alexa_skill.
-2. Download the correct distrubtion of ngrok for your operating system.
+2. Download the correct distribution of ngrok for your operating system.
 ```
     $ https://ngrok.com/download
 ```
